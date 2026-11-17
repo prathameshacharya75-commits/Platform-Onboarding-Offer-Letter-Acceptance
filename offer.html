@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Offer Letter</title>
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>EMPLOYMENT OFFER LETTER</h1>
+
+    <p>Dear {{ employee.name }},</p>
+
+    <p>
+        We are pleased to offer you the position of
+        <b>{{ employee.designation }}</b>.
+    </p>
+
+    <p>
+        Your annual salary will be Rs.
+        {{ employee.salary }}.
+    </p>
+
+    <p>
+        Your joining date is {{ employee.joining_date }}.
+    </p>
+
+    <h3>Offer Status: {{ employee.status }}</h3>
+
+    {% if employee.status == "Pending" %}
+
+    <form action="/decision" method="POST">
+
+        <button name="decision" value="Accepted">
+            Accept Offer
+        </button>
+
+        <button name="decision" value="Rejected">
+            Reject Offer
+        </button>
+
+    </form>
+
+    {% elif employee.status == "Accepted" %}
+
+    <a href="/onboarding" class="btn">
+        Continue Onboarding
+    </a>
+
+    {% else %}
+
+    <p>You have rejected this offer.</p>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
